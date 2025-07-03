@@ -1,0 +1,44 @@
+<div class="search-container">
+  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="search-form">
+    <div class="form-group">
+      <label for="cityName" class="form-label">Buscar ciudad:</label>
+      <div class="input-group">
+        <input 
+          type="text" 
+          id="cityName"
+          formControlName="cityName"
+          class="form-input"
+          placeholder="Ingresa el nombre de la ciudad..."
+          [class.error]="cityName?.invalid && cityName?.touched"
+        >
+        <button type="submit" class="search-button" [disabled]="searchForm.invalid">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="M21 21l-4.35-4.35"></path>
+          </svg>
+          Buscar
+        </button>
+        <button type="button" class="clear-button" (click)="clearSearch()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      
+      @if (cityName?.invalid && cityName?.touched) {
+        <div class="error-messages">
+          @if (cityName?.errors?.['required']) {
+            <p class="error-text">El nombre de la ciudad es requerido</p>
+          }
+          @if (cityName?.errors?.['minlength']) {
+            <p class="error-text">El nombre debe tener al menos 2 caracteres</p>
+          }
+          @if (cityName?.errors?.['maxlength']) {
+            <p class="error-text">El nombre no puede tener más de 50 caracteres</p>
+          }
+        </div>
+      }
+    </div>
+  </form>
+</div>

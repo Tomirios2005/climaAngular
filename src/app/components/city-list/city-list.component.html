@@ -1,0 +1,25 @@
+<div class="cities-container">
+  <div class="cities-grid">
+    @for (city of cities; track city.name + city.lat + city.lon) {
+      <div class="city-card" (click)="selectCity(city)">
+        <div class="city-info">
+          <h3 class="city-name">{{ city.name }}</h3>
+          <p class="city-details">
+            @if (city.state) {
+              <span class="state">{{ city.state }}, </span>
+            }
+            <span class="country">{{ city.country }}</span>
+          </p>
+          <p class="coordinates">
+            <small>{{ city.lat.toFixed(2) }}, {{ city.lon.toFixed(2) }}</small>
+          </p>
+        </div>
+        <div class="city-arrow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9,18 15,12 9,6"></polyline>
+          </svg>
+        </div>
+      </div>
+    }
+  </div>
+</div>

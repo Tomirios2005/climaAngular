@@ -1,0 +1,59 @@
+@if (weather) {
+  <div class="weather-card">
+    <div class="weather-header">
+      <div class="location-info">
+        <h2 class="city-name">{{ weather.city }}</h2>
+        <p class="weather-description">{{ capitalizeDescription(weather.description) }}</p>
+      </div>
+      <div class="weather-icon">
+        <img [src]="getWeatherIconUrl(weather.icon)" [alt]="weather.description">
+      </div>
+    </div>
+
+    <div class="temperature-section">
+      <div class="main-temp">
+        <span class="temperature">{{ weather.temperature }}°</span>
+        <span class="celsius">C</span>
+      </div>
+      <p class="feels-like">Sensación térmica: {{ weather.feelsLike }}°C</p>
+    </div>
+
+    <div class="weather-details">
+      <div class="detail-item">
+        <div class="detail-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <div class="detail-content">
+          <p class="detail-label">Presión</p>
+          <p class="detail-value">{{ weather.pressure }} hPa</p>
+        </div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <div class="detail-content">
+          <p class="detail-label">Humedad</p>
+          <p class="detail-value">{{ weather.humidity }}%</p>
+        </div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+          </svg>
+        </div>
+        <div class="detail-content">
+          <p class="detail-label">Viento</p>
+          <p class="detail-value">{{ weather.windSpeed }} km/h {{ getWindDirection(weather.windDirection) }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+}
