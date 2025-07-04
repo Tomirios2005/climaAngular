@@ -1,0 +1,120 @@
+.cities-container {
+  max-width: 800px;
+  margin: 0 auto;
+
+  .cities-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+    .city-card {
+      background: #fff;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 2px solid transparent;
+      position: relative;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+        border-color: #667eea;
+
+        .city-arrow {
+          opacity: 1;
+          transform: translateX(3px);
+        }
+      }
+
+      .city-info {
+        flex: 1;
+        min-width: 0;
+
+        .city-name {
+          font-size: 1.25rem;
+          font-weight: 600;
+          color: #495057;
+          margin: 0 0 0.5rem 0;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+
+        .city-details {
+          color: #6c757d;
+          margin: 0 0 0.5rem 0;
+          font-size: 0.95rem;
+        }
+
+        .state {
+          font-weight: 500;
+        }
+
+        .country {
+          font-weight: 500;
+          color: #495057;
+        }
+
+        .coordinates {
+          color: #adb5bd;
+          margin: 0;
+          font-size: 0.8rem;
+        }
+      }
+
+      .city-arrow {
+        color: #667eea;
+        opacity: 0.7;
+        transition: all 0.3s ease;
+        margin-left: 1rem;
+      }
+
+      .add-fav-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+        border: none;
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: box-shadow 0.2s, transform 0.2s;
+        margin-left: 1rem;
+        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
+
+        &:hover {
+          box-shadow: 0 4px 16px rgba(102, 126, 234, 0.18);
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .cities-container {
+    .cities-grid {
+      grid-template-columns: 1fr;
+
+      .city-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+
+        .city-arrow {
+          margin-left: 0;
+          margin-top: 0.5rem;
+        }
+
+        .add-fav-btn {
+          width: 100%;
+          margin: 1rem 0 0 0;
+        }
+      }
+    }
+  }
+}

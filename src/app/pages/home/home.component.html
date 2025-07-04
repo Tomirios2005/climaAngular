@@ -4,6 +4,15 @@
     <p class="hero-subtitle">Busca el clima actual de cualquier ciudad del mundo</p>
   </div>
 
+  <!-- Clima de mi ubicación actual -->
+  <div class="weather-section" *ngIf="currentWeather && myLocationCity">
+    <h2>Clima en tu ubicación actual</h2>
+    <app-weather-display [weather]="currentWeather"></app-weather-display>
+    <div style="text-align:center; margin-top:1rem;">
+      <div *ngIf="success" class="success">{{ success }}</div>
+    </div>
+  </div>
+
   <div class="search-section">
     <app-weather-search 
       (citiesFound)="onCitiesSearched($event)"
@@ -13,34 +22,26 @@
     </app-weather-search>
   </div>
 
-  @if (loading) {
-    <div class="loading-container">
-      <div class="loading-spinner"></div>
-      <p>Cargando...</p>
-    </div>
-  }
+  <div class="loading-container" *ngIf="loading">
+    <div class="loading-spinner"></div>
+    <p>Cargando...</p>
+  </div>
 
-  @if (error) {
-    <div class="error-container">
-      <p class="error-message">{{ error }}</p>
-    </div>
-  }
+  <div class="error-container" *ngIf="error">
+    <p class="error-message">{{ error }}</p>
+  </div>
 
-  @if (cities.length > 0) {
-    <div class="cities-section">
-      <h2>Selecciona una ciudad:</h2>
-      <app-city-list 
-        [cities]="cities"
-        (weatherSelected)="onWeatherSelected($event)"
-        (loadingChange)="onLoadingChange($event)"
-        (errorChange)="onErrorChange($event)">
-      </app-city-list>
-    </div>
-  }
+  <div class="cities-section" *ngIf="cities.length > 0">
+    <h2>Selecciona una ciudad:</h2>
+    <app-city-list 
+      [cities]="cities"
+      (weatherSelected)="onWeatherSelected($event)"
+      (loadingChange)="onLoadingChange($event)"
+      (errorChange)="onErrorChange($event)">
+    </app-city-list>
+  </div>
 
-  @if (currentWeather) {
-    <div class="weather-section">
-      <app-weather-display [weather]="currentWeather"></app-weather-display>
-    </div>
-  }
+  <div class="weather-section" *ngIf="currentWeather && !myLocationCity">
+    <app-weather-display [weather]="currentWeather"></app-weather-display>
+  </div>
 </div>

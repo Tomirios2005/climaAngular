@@ -42,6 +42,20 @@
           <p class="detail-value">{{ weather.humidity }}%</p>
         </div>
       </div>
+      <div style="text-align:center; margin-top:1rem;">
+      <button 
+        *ngIf="!isFavorite" 
+        class="add-fav-btn" 
+        (click)="addFavorite.emit()">
+        Añadir a favoritoss
+      </button>
+      <button 
+        *ngIf="isFavorite" 
+        class="remove-fav-btn" 
+        (click)="removeFavorite.emit()">
+        Eliminar de favoritos
+      </button>
+    </div>
 
       <div class="detail-item">
         <div class="detail-icon">
@@ -56,4 +70,5 @@
       </div>
     </div>
   </div>
+  
 }

@@ -7,7 +7,7 @@ import { WeatherDisplay } from '../../interfaces/weather.interface';
 @Component({
   selector: 'app-weather-search',
   templateUrl: './weather-search.component.html',
-  styleUrls: ['./weather-search.component.css'],
+  styleUrls: ['./weather-search.component.scss'],
   standalone: false
 })
 export class WeatherSearchComponent {

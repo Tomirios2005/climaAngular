@@ -1,14 +1,18 @@
-import { Component, Input } from '@angular/core';
 import { WeatherDisplay } from '../../interfaces/weather.interface';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-weather-display',
   templateUrl: './weather-display.component.html',
-  styleUrls: ['./weather-display.component.css'],
+  styleUrls: ['./weather-display.component.scss'],
   standalone:false
 })
 export class WeatherDisplayComponent {
   @Input() weather: WeatherDisplay | null = null;
+  @Input() isFavorite: boolean = false;
+  @Output() addFavorite = new EventEmitter<void>();
+  @Output() removeFavorite = new EventEmitter<void>();
+
 
   getWeatherIconUrl(icon: string): string {
     return `https://openweathermap.org/img/wn/${icon}@2x.png`;

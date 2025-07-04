@@ -1,35 +1,17 @@
-<div class="about-container">
-  <div class="about-header">
-    <h1>Sobre este Proyecto</h1>
-    <p class="about-description">
-      Este proyecto fue desarrollado como Trabajo Práctico Final para el Seminario Angular 2025.
-      Es una aplicación web que permite consultar el clima actual de cualquier ciudad del mundo.
-    </p>
-  </div>
-
-  <div class="info-grid">
-    <div class="info-card">
-      <h2>Datos del Estudiante</h2>
-      <div class="student-info">
-        <p><strong>Nombre:</strong> {{ studentData.name }}</p>
-        <p><strong>Email:</strong> {{ studentData.email }}</p>
-        <p><strong>Sede:</strong> {{ studentData.sede }}</p>
-      </div>
-    </div>
-
-
-    <div class="info-card">
-      <h2>API Utilizada</h2>
-      <p>
-        Esta aplicación utiliza la API gratuita de 
-        <a href="https://openweathermap.org/api" target="_blank" rel="noopener noreferrer">
-          OpenWeatherMap
-        </a> 
-        para obtener datos meteorológicos actualizados.
-      </p>
-      <p>
-        La aplicación implementa tanto búsqueda por coordenadas como por nombre de ciudad.
-      </p>
+<div class="ciudades-container">
+ 
+    
+  <div class="favorites-section">
+    <h2>Ciudades Favoritas</h2>
+    <div *ngIf="loading">Cargando ciudades favoritas...</div>
+    <div *ngIf="error" class="error">{{ error }}</div>
+    <ul *ngIf="!loading && !error && favoriteCities.length > 0">
+      <li *ngFor="let city of favoriteCities">
+        {{ city.name }}
+      </li>
+    </ul>
+    <div *ngIf="!loading && !error && favoriteCities.length === 0">
+      No tienes ciudades favoritas guardadas.
     </div>
   </div>
 </div>

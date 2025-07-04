@@ -1,121 +1,87 @@
-.about-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
+.ciudades-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem 1rem;
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px rgba(102, 126, 234, 0.08);
 
-.about-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
+  .favorites-section {
+    h2 {
+      color: #667eea;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      letter-spacing: 1px;
+    }
 
-.about-header h1 {
-  font-size: 2.5rem;
-  color: #495057;
-  margin-bottom: 1rem;
-}
+    .error {
+      color: #dc3545;
+      background: #f8d7da;
+      border: 1px solid #f5c6cb;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      font-weight: 500;
+    }
 
-.about-description {
-  font-size: 1.1rem;
-  color: #6c757d;
-  max-width: 800px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1rem 0;
 
-.info-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
+      li {
+        background: linear-gradient(90deg, #e0e7ff 0%, #f3f4f6 100%);
+        color: #495057;
+        margin-bottom: 0.75rem;
+        padding: 1rem 1.5rem;
+        border-radius: 0.75rem;
+        font-size: 1.1rem;
+        font-weight: 500;
+        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.05);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
 
-.info-card {
-  background: white;
-  border-radius: 1rem;
-  padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+        &:last-child {
+          margin-bottom: 0;
+        }
 
-.info-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
+        // Puedes agregar un icono de estrella o favorito aquí si lo deseas
+        // &::before {
+        //   content: "★";
+        //   color: #ffd700;
+        //   margin-right: 0.5rem;
+        // }
+      }
+    }
 
-.info-card h2 {
-  color: #495057;
-  margin-bottom: 1.5rem;
-  font-size: 1.5rem;
-  border-bottom: 2px solid #667eea;
-  padding-bottom: 0.5rem;
-}
-
-.student-info p {
-  margin-bottom: 0.5rem;
-  color: #6c757d;
-  font-size: 1rem;
-}
-
-.student-info strong {
-  color: #495057;
-}
-
-.tech-list,
-.features-list {
-  list-style: none;
-  padding: 0;
-}
-
-.tech-list li,
-.features-list li {
-  padding: 0.5rem 0;
-  color: #6c757d;
-  border-bottom: 1px solid #e9ecef;
-  position: relative;
-  padding-left: 1.5rem;
-}
-
-.tech-list li:before,
-.features-list li:before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  color: #28a745;
-  font-weight: bold;
-}
-
-.tech-list li:last-child,
-.features-list li:last-child {
-  border-bottom: none;
-}
-
-.info-card p {
-  color: #6c757d;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
-.info-card a {
-  color: #667eea;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.info-card a:hover {
-  text-decoration: underline;
-}
-
-@media (max-width: 768px) {
-  .about-header h1 {
-    font-size: 2rem;
+    div {
+      &.loading,
+      &.no-favorites {
+        text-align: center;
+        color: #6c757d;
+        font-size: 1rem;
+        margin-top: 1rem;
+      }
+    }
   }
-  
-  .info-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .info-card {
-    padding: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .ciudades-container {
+    padding: 1rem 0.5rem;
+
+    .favorites-section {
+      h2 {
+        font-size: 1.3rem;
+      }
+      ul li {
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+      }
+    }
   }
 }
