@@ -4,6 +4,7 @@ import { FavoritesService, FavoriteCity } from '../../services/favorites.service
 import { CitySearchResult } from '../../interfaces/city.interface';
 import { WeatherDisplay } from '../../interfaces/weather.interface';
 
+
 @Component({
   selector: 'app-city-list',
   templateUrl: './city-list.component.html',
