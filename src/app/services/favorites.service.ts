@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { catchError, of } from 'rxjs';
+import { throwError } from 'rxjs';
+
 
 export interface FavoriteCity {
   id?: string;
@@ -30,9 +33,20 @@ export class FavoritesService {
 }
 
   getFavorites(): Observable<FavoriteCity[]> {
-    const user = this.getUserToken();
-    return this.http.get<FavoriteCity[]>(`${this.apiUrl}?user=${user}`);
-  }
+  const user = this.getUserToken();
+  return this.http.get<FavoriteCity[]>(`${this.apiUrl}?user=${user}`).pipe(
+    catchError((err) => {
+      // Si el error es por "no encontrado", devolvemos un array vacío
+      if (err.status === 404) {
+        return of([]);
+      }
+
+      // Si es otro tipo de error, propagamos el mensaje
+      return throwError(() => err);
+    })
+  );
+}
+
 
   addFavorite(name: string, lat: number, lon: number): Observable<FavoriteCity> {
     const user = this.getUserToken();
