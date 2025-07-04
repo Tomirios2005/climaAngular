@@ -8,7 +8,11 @@
     <ul *ngIf="!loading && !error && favoriteCities.length > 0">
       <li *ngFor="let city of favoriteCities">
         {{ city.name }}
+        <button class="remove-fav-btn" (click)="deleteFavorite(city); $event.stopPropagation()">
+          Eliminar de favoritos
+        </button>
       </li>
+      
     </ul>
     <div *ngIf="!loading && !error && favoriteCities.length === 0">
       No tienes ciudades favoritas guardadas.

@@ -3,6 +3,8 @@ import { CitySearchResult } from '../../interfaces/city.interface';
 import { WeatherDisplay } from '../../interfaces/weather.interface';
 import { WeatherService } from '../../services/weather.service';
 import { FavoritesService } from '../../services/favorites.service';
+import { City } from '../../interfaces/city.interface';
+
 
 @Component({
   selector: 'app-home',
@@ -17,6 +19,7 @@ export class HomeComponent implements OnInit {
   error: string | null = null;
   myLocationCity: CitySearchResult | null = null;
   success: string | null = null;
+  selectedCity: CitySearchResult | null = null;
 
   constructor(
     private weatherService: WeatherService,
@@ -47,9 +50,11 @@ export class HomeComponent implements OnInit {
             name: weather.city || 'Mi ubicación',
             country: '', // No disponible en WeatherDisplay
             state: '',   // No disponible en WeatherDisplay
-            lat,
-            lon
+            lat: lat,
+            lon:lon
           };
+          this.selectedCity = this.myLocationCity;
+
         },
         error: () => {
           this.error = 'No se pudo obtener el clima de tu ubicación.';
@@ -64,26 +69,6 @@ export class HomeComponent implements OnInit {
   );
 }
 
-  addMyLocationToFavorites() {
-    if (this.myLocationCity) {
-      this.favoritesService.addFavorite(
-        this.myLocationCity.name,
-        this.myLocationCity.lat,
-        this.myLocationCity.lon
-      ).subscribe({
-        next: () => {
-          this.success = `Ciudad "${this.myLocationCity?.name}" añadida a favoritos.`;
-          this.error = null;
-          setTimeout(() => this.success = null, 2000);
-        },
-        error: () => {
-          this.error = 'No se pudo añadir la ciudad a favoritos.';
-          setTimeout(() => this.error = null, 2000);
-        }
-      });
-    }
-  }
-
   onCitiesSearched(cities: CitySearchResult[]) {
     this.cities = cities;
     this.currentWeather = null;
@@ -92,6 +77,15 @@ export class HomeComponent implements OnInit {
 
   onWeatherSelected(weather: WeatherDisplay) {
     this.currentWeather = weather;
+    this.selectedCity = {
+    name: weather.city,
+    country: '', // si no tenés estos datos
+    state: '',
+    lat: weather.lat,
+    lon: weather.lon
+    }
+
+
     this.cities = [];
   }
 
@@ -106,4 +100,17 @@ export class HomeComponent implements OnInit {
       this.currentWeather = null;
     }
   }
+  addToFavorites(city: City) {
+  this.favoritesService.addFavorite(city.name, city.lat, city.lon).subscribe({
+    next: () => {
+      this.success = `Ciudad "${city.name}" añadida a favoritos.`;
+      this.error = null;
+      setTimeout(() => this.success = null, 2000);
+    },
+    error: () => {
+      this.error = `No se pudo añadir "${city.name}" a favoritos.`;
+      setTimeout(() => this.error = null, 2000);
+    }
+  });
+}
 }

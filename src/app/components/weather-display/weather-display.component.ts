@@ -1,5 +1,7 @@
 import { WeatherDisplay } from '../../interfaces/weather.interface';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { City } from '../../interfaces/city.interface';
+
 
 @Component({
   selector: 'app-weather-display',
@@ -10,6 +12,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class WeatherDisplayComponent {
   @Input() weather: WeatherDisplay | null = null;
   @Input() isFavorite: boolean = false;
+  @Input() city: City | null = null;
+  @Output() addFavoriteCity = new EventEmitter<City>();
   @Output() addFavorite = new EventEmitter<void>();
   @Output() removeFavorite = new EventEmitter<void>();
 
@@ -27,4 +31,9 @@ export class WeatherDisplayComponent {
   capitalizeDescription(description: string): string {
     return description.charAt(0).toUpperCase() + description.slice(1);
   }
+  onAddToFavoritesClicked() {
+  if (this.city) {
+    this.addFavoriteCity.emit(this.city);
+  }
+}
 }

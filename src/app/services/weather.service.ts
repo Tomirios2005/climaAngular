@@ -47,7 +47,10 @@ export class WeatherService {
       windSpeed: Math.round(data.wind.speed * 3.6 * 100) / 100, // Convert m/s to km/h
       windDirection: data.wind.deg,
       description: data.weather[0].description,
-      icon: data.weather[0].icon
+      icon: data.weather[0].icon,
+      lat: data.coord.lat,           // 👈 extraído desde WeatherData
+      lon: data.coord.lon
+
     };
   }
 

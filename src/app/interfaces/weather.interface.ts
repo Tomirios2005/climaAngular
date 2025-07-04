@@ -32,4 +32,6 @@ export interface WeatherDisplay {
   windDirection: number;
   description: string;
   icon: string;
+  lat: number;   // 👈 añadidos
+  lon: number; 
 }

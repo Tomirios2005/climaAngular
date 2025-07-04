@@ -32,17 +32,21 @@ export class CiudadesFavoritasComponent implements OnInit {
       }
     });
   }
-
-  addFavorite(cityName: string, lat: number, lon: number) {
-    this.favoritesService.addFavorite(cityName, lat, lon).subscribe({
-      next: (city) => {
-        this.success = `Ciudad "${city.name}" añadida a favoritos.`;
-        this.loadFavorites();
-        setTimeout(() => this.success = null, 2000);
+  deleteFavorite(city: FavoriteCity | null) {
+    if (!city||!city.id) {
+      this.error = 'Ciudad no válida.';
+      return;
+    }
+    this.loading = true;
+    this.favoritesService.deleteFavorite(city.id).subscribe({
+      next: () => {
+        this.favoriteCities = this.favoriteCities.filter(fav => fav.id !== city.id);
+        this.success = 'Ciudad eliminada de favoritos.';
+        this.loading = false;
       },
       error: () => {
-        this.error = 'No se pudo añadir la ciudad a favoritos.';
-        setTimeout(() => this.error = null, 2000);
+        this.error = 'No se pudo eliminar la ciudad de favoritos.';
+        this.loading = false;
       }
     });
   }
