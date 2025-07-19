@@ -150,3 +150,22 @@
         }
       }
     }
+
+.remove-fav-btn {
+  background: linear-gradient(135deg, #dc3545 0%, #a71d2a 100%);
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+  margin-left: auto;
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+  display: inline-block;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(220, 53, 69, 0.5);
+    transform: translateY(-2px);
+  }
+}
