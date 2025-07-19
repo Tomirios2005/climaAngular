@@ -1,6 +1,6 @@
 import { WeatherDisplay } from '../../interfaces/weather.interface';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { City } from '../../interfaces/city.interface';
+import { City, CitySearchResult } from '../../interfaces/city.interface';
 
 
 @Component({
@@ -17,6 +17,7 @@ export class WeatherDisplayComponent {
   @Output() addFavoriteCity = new EventEmitter<City>();
   @Output() addFavorite = new EventEmitter<void>();
   @Output() removeFavorite = new EventEmitter<void>();
+
 
 
 

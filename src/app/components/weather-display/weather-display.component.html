@@ -1,74 +1,80 @@
 @if (weather) {
-  <div class="weather-card">
-    <div class="weather-header">
-      <div class="location-info">
-        <h2 class="city-name">{{ weather.city }}</h2>
-        <p class="weather-description">{{ capitalizeDescription(weather.description) }}</p>
+<div class="weather-card">
+  <div class="weather-header">
+    <div class="location-info">
+      <h2 class="city-name">{{ weather.city }}</h2>
+      <p class="weather-description">{{ capitalizeDescription(weather.description) }}</p>
+    </div>
+    <div class="weather-icon">
+      <img [src]="getWeatherIconUrl(weather.icon)" [alt]="weather.description">
+    </div>
+  </div>
+
+  <div class="temperature-section">
+    <div class="main-temp">
+
+      <span class="temperature"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
+          class="bi bi-thermometer" viewBox="0 0 16 16">
+          <path d="M8 14a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" />
+          <path
+            d="M8 0a2.5 2.5 0 0 0-2.5 2.5v7.55a3.5 3.5 0 1 0 5 0V2.5A2.5 2.5 0 0 0 8 0M6.5 2.5a1.5 1.5 0 1 1 3 0v7.987l.167.15a2.5 2.5 0 1 1-3.333 0l.166-.15z" />
+        </svg>{{ weather.temperature }}°</span>
+      <span class="celsius">C</span>
+    </div>
+    <p class="feels-like">Sensación térmica: {{ weather.feelsLike }}°C</p>
+  </div>
+
+  <div class="weather-details">
+    <div class="detail-item">
+      <div class="detail-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-fog2"
+          viewBox="0 0 16 16">
+          <path
+            d="M8.5 4a4 4 0 0 0-3.8 2.745.5.5 0 1 1-.949-.313 5.002 5.002 0 0 1 9.654.595A3 3 0 0 1 13 13H.5a.5.5 0 0 1 0-1H13a2 2 0 0 0 .001-4h-.026a.5.5 0 0 1-.5-.445A4 4 0 0 0 8.5 4M0 8.5A.5.5 0 0 1 .5 8h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5" />
+        </svg>
       </div>
-      <div class="weather-icon">
-        <img [src]="getWeatherIconUrl(weather.icon)" [alt]="weather.description">
+      <div class="detail-content">
+        <p class="detail-label">Presión</p>
+        <p class="detail-value">{{ weather.pressure }} hPa</p>
       </div>
     </div>
 
-    <div class="temperature-section">
-      <div class="main-temp">
-        <span class="temperature">{{ weather.temperature }}°</span>
-        <span class="celsius">C</span>
+    <div class="detail-item">
+      <div class="detail-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moisture"
+          viewBox="0 0 16 16">
+          <path
+            d="M13.5 0a.5.5 0 0 0 0 1H15v2.75h-.5a.5.5 0 0 0 0 1h.5V7.5h-1.5a.5.5 0 0 0 0 1H15v2.75h-.5a.5.5 0 0 0 0 1h.5V15h-1.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 .5-.5V.5a.5.5 0 0 0-.5-.5zM7 1.5l.364-.343a.5.5 0 0 0-.728 0l-.002.002-.006.007-.022.023-.08.088a29 29 0 0 0-1.274 1.517c-.769.983-1.714 2.325-2.385 3.727C2.368 7.564 2 8.682 2 9.733 2 12.614 4.212 15 7 15s5-2.386 5-5.267c0-1.05-.368-2.169-.867-3.212-.671-1.402-1.616-2.744-2.385-3.727a29 29 0 0 0-1.354-1.605l-.022-.023-.006-.007-.002-.001zm0 0-.364-.343zm-.016.766L7 2.247l.016.019c.24.274.572.667.944 1.144.611.781 1.32 1.776 1.901 2.827H4.14c.58-1.051 1.29-2.046 1.9-2.827.373-.477.706-.87.945-1.144zM3 9.733c0-.755.244-1.612.638-2.496h6.724c.395.884.638 1.741.638 2.496C11 12.117 9.182 14 7 14s-4-1.883-4-4.267" />
+        </svg>
       </div>
-      <p class="feels-like">Sensación térmica: {{ weather.feelsLike }}°C</p>
+      <div class="detail-content">
+        <p class="detail-label">Humedad</p>
+        <p class="detail-value">{{ weather.humidity }}%</p>
+      </div>
     </div>
-
-    <div class="weather-details">
-      <div class="detail-item">
-        <div class="detail-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-          </svg>
-        </div>
-        <div class="detail-content">
-          <p class="detail-label">Presión</p>
-          <p class="detail-value">{{ weather.pressure }} hPa</p>
-        </div>
-      </div>
-
-      <div class="detail-item">
-        <div class="detail-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-          </svg>
-        </div>
-        <div class="detail-content">
-          <p class="detail-label">Humedad</p>
-          <p class="detail-value">{{ weather.humidity }}%</p>
-        </div>
-      </div>
-      <div style="text-align:center; margin-top:1rem;">
-      <button 
-        *ngIf="!isFavorite" 
-        class="add-fav-btn" 
-        (click)="onAddToFavoritesClicked()">
+    <div style="text-align:center; margin-top:1rem;">
+      <button *ngIf="!isFavorite" class="add-fav-btn" (click)="onAddToFavoritesClicked()">
         Añadir a favoritos
       </button>
-      <button 
-        *ngIf="isFavorite" 
-        class="remove-fav-btn" 
-        (click)="removeFavorite.emit()">
+      <button *ngIf="isFavorite" class="remove-fav-btn" (click)="removeFavorite.emit()">
         Eliminar de favoritos
       </button>
     </div>
 
-      <div class="detail-item">
-        <div class="detail-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
-          </svg>
-        </div>
-        <div class="detail-content">
-          <p class="detail-label">Viento</p>
-          <p class="detail-value">{{ weather.windSpeed }} km/h {{ getWindDirection(weather.windDirection) }}</p>
-        </div>
+    <div class="detail-item">
+      <div class="detail-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wind"
+          viewBox="0 0 16 16">
+          <path
+            d="M12.5 2A2.5 2.5 0 0 0 10 4.5a.5.5 0 0 1-1 0A3.5 3.5 0 1 1 12.5 8H.5a.5.5 0 0 1 0-1h12a2.5 2.5 0 0 0 0-5m-7 1a1 1 0 0 0-1 1 .5.5 0 0 1-1 0 2 2 0 1 1 2 2h-5a.5.5 0 0 1 0-1h5a1 1 0 0 0 0-2M0 9.5A.5.5 0 0 1 .5 9h10.042a3 3 0 1 1-3 3 .5.5 0 0 1 1 0 2 2 0 1 0 2-2H.5a.5.5 0 0 1-.5-.5" />
+        </svg>
+      </div>
+      <div class="detail-content">
+        <p class="detail-label">Viento</p>
+        <p class="detail-value">{{ weather.windSpeed }} km/h {{ getWindDirection(weather.windDirection) }}</p>
       </div>
     </div>
   </div>
-  
+</div>
+
 }

@@ -1,17 +1,18 @@
 <div class="ciudades-container">
  
-    
+
   <div class="favorites-section">
     <h2>Ciudades Favoritas</h2>
     <div *ngIf="loading">Cargando ciudades favoritas...</div>
     <div *ngIf="error" class="error">{{ error }}</div>
     <ul *ngIf="!loading && !error && favoriteCities.length > 0">
-      <li *ngFor="let city of favoriteCities">
+      <li style="cursor:pointer" *ngFor="let city of favoriteCities" (click)="verClima(city)">
         {{ city.name }}
         <button class="remove-fav-btn" (click)="deleteFavorite(city); $event.stopPropagation()">
           Eliminar de favoritos
         </button>
       </li>
+      
       
     </ul>
     <div *ngIf="!loading && !error && favoriteCities.length === 0">

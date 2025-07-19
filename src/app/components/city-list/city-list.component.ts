@@ -12,6 +12,7 @@ import { City } from '../../interfaces/city.interface';
 })
 export class CityListComponent {
   @Input() cities: CitySearchResult[] = [];
+  @Input() selectedCity: CitySearchResult | null = null;
   @Output() weatherSelected = new EventEmitter<WeatherDisplay>();
   @Output() loadingChange = new EventEmitter<boolean>();
   @Output() errorChange = new EventEmitter<string | null>();
@@ -38,15 +39,6 @@ export class CityListComponent {
         this.errorChange.emit(error.message);
       }
     });
-  }
-
-  getCityDisplayName(city: CitySearchResult): string {
-    let displayName = city.name;
-    if (city.state) {
-      displayName += `, ${city.state}`;
-    }
-    displayName += `, ${city.country}`;
-    return displayName;
   }
 
   trackCity(index: number, city: any) {

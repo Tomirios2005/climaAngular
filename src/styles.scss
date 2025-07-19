@@ -108,6 +108,23 @@ input, textarea, select {
 .fade-in {
   animation: fadeIn 0.5s ease-in-out;
 }
+.add-fav-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+        border: none;
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: box-shadow 0.2s, transform 0.2s;
+        margin-left: 1rem;
+        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
+
+        &:hover {
+          box-shadow: 0 4px 16px rgba(102, 126, 234, 0.18);
+          transform: translateY(-2px);
+        }
+      }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
@@ -128,6 +145,10 @@ input, textarea, select {
   .container {
     padding: 0 0.5rem;
   }
+  .add-fav-btn {
+          width: 100%;
+          margin: 1rem 0 0 0;
+        }
 }
 
 /* Focus States */
