@@ -8,7 +8,10 @@
   <div class="weather-section" *ngIf="currentWeather && myLocationCity">
     <h2>Clima en tu ubicación actual</h2>
     <app-weather-display [weather]="currentWeather" [city]="selectedCity"
-  (addFavoriteCity)="addToFavorites($event)"></app-weather-display>
+  (addFavoriteCity)="addToFavorites($event)"   [isFavorite]="selectedCity ? isCityFavorite(selectedCity) : false"
+  (removeFavorite)="selectedCity ? removeFavorite(selectedCity) : null"
+>
+   </app-weather-display>
     <div style="text-align:center; margin-top:1rem;">
       <div *ngIf="success" class="success">{{ success }}</div>
     </div>

@@ -49,7 +49,8 @@ export class WeatherService {
       description: data.weather[0].description,
       icon: data.weather[0].icon,
       lat: data.coord.lat,           // 👈 extraído desde WeatherData
-      lon: data.coord.lon
+      lon: data.coord.lon,
+      country: data.sys.country || '' // Agregado para incluir el país
 
     };
   }

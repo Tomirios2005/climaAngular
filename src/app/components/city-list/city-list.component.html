@@ -16,16 +16,6 @@
           <polyline points="9,18 15,12 9,6"></polyline>
         </svg>
       </div>
-      <ng-container *ngIf="isFavorite(city) as fav; else addBtn">
-        <button class="remove-fav-btn" (click)="removeFromFavorites(fav); $event.stopPropagation()">
-          Eliminar de favoritos
-        </button>
-      </ng-container>
-      <ng-template #addBtn>
-        <button class="add-fav-btn" (click)="addToFavorites(city); $event.stopPropagation()">
-          Añadir a favoritos
-        </button>
-      </ng-template>
     </div>
   </div>
 </div>

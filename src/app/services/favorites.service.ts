@@ -48,7 +48,7 @@ export class FavoritesService {
 }
 
 
-  addFavorite(name: string, lat: number, lon: number): Observable<FavoriteCity> {
+  addFavorite(name: string, lat:number, lon:number): Observable<FavoriteCity> {
     const user = this.getUserToken();
     return this.http.post<FavoriteCity>(this.apiUrl, { name, user, lat, lon });
   }

@@ -3,7 +3,7 @@ export interface City {
   lat: number;
   lon: number;
   country: string;
-  state?: string;
+  state: string;
 }
 
 export interface CitySearchResult {
@@ -11,6 +11,6 @@ export interface CitySearchResult {
   lat: number;
   lon: number;
   country: string;
-  state?: string;
+  state: string;
   local_names?: { [key: string]: string };
 }

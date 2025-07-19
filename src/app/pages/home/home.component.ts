@@ -4,6 +4,7 @@ import { WeatherDisplay } from '../../interfaces/weather.interface';
 import { WeatherService } from '../../services/weather.service';
 import { FavoritesService } from '../../services/favorites.service';
 import { City } from '../../interfaces/city.interface';
+import { FavoriteCity } from '../../services/favorites.service';
 
 
 @Component({
@@ -20,6 +21,8 @@ export class HomeComponent implements OnInit {
   myLocationCity: CitySearchResult | null = null;
   success: string | null = null;
   selectedCity: CitySearchResult | null = null;
+  favoriteCities: FavoriteCity[] = [];
+  
 
   constructor(
     private weatherService: WeatherService,
@@ -28,6 +31,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMyLocationWeather();
+    this.loadFavorites();
   }
 
    getMyLocationWeather() {
@@ -48,7 +52,7 @@ export class HomeComponent implements OnInit {
           this.error = null;
           this.myLocationCity = {
             name: weather.city || 'Mi ubicación',
-            country: '', // No disponible en WeatherDisplay
+            country: weather.country, // No disponible en WeatherDisplay
             state: '',   // No disponible en WeatherDisplay
             lat: lat,
             lon:lon
@@ -68,6 +72,26 @@ export class HomeComponent implements OnInit {
     }
   );
 }
+  loadFavorites() {
+    this.favoritesService.getFavorites().subscribe({
+      next: (favorites) => {
+        this.favoriteCities = favorites;
+      },
+      error: () => {
+        this.error = 'No se pudieron cargar los favoritos.';
+      }
+    });
+
+  }
+  areCoordinatesClose(lat1: number, lon1: number, lat2: number, lon2: number, tolerance = 0.01): boolean {
+      return Math.abs(lat1 - lat2) <= tolerance && Math.abs(lon1 - lon2) <= tolerance;
+  }
+  isCityFavorite(city: CitySearchResult): boolean {
+  return this.favoriteCities.some(fav =>
+    fav.name === city.name &&  // opcional: comparar también por nombre
+    this.areCoordinatesClose(fav.lat, fav.lon, city.lat, city.lon)
+  );}
+
 
   onCitiesSearched(cities: CitySearchResult[]) {
     this.cities = cities;
@@ -100,17 +124,43 @@ export class HomeComponent implements OnInit {
       this.currentWeather = null;
     }
   }
+  removeFavorite(city: City| CitySearchResult) {
+  const ciudad = this.favoriteCities.find(fav =>
+    fav.name === city.name &&this.areCoordinatesClose(fav.lat, fav.lon, city.lat, city.lon)
+  );
+  if (!ciudad || !ciudad.id) {
+    this.error = 'No se encontró la ciudad en favoritos para eliminar.';
+    return;
+  }
+  this.favoritesService.deleteFavorite(ciudad.id).subscribe({
+    next: () => {
+      this.success = `Ciudad "${city.name}" eliminada de favoritos.`;
+      this.error = null;
+      this.loadFavorites(); // actualizar lista
+      setTimeout(() => this.success = null, 2000);
+    },
+    error: () => {
+      this.error = 'No se pudo eliminar la ciudad de favoritos.';
+      setTimeout(() => this.error = null, 2000);
+    }
+  });
+}
+
   addToFavorites(city: City) {
+    console.log('Añadiendo a favoritos:', city);
   this.favoritesService.addFavorite(city.name, city.lat, city.lon).subscribe({
     next: () => {
       this.success = `Ciudad "${city.name}" añadida a favoritos.`;
       this.error = null;
       setTimeout(() => this.success = null, 2000);
+      this.loadFavorites(); // actualizar lista de favoritos
     },
     error: () => {
       this.error = `No se pudo añadir "${city.name}" a favoritos.`;
       setTimeout(() => this.error = null, 2000);
     }
   });
+
+    
 }
 }

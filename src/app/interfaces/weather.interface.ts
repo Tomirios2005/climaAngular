@@ -20,6 +20,9 @@ export interface WeatherData {
     lon: number;
     lat: number;
   };
+  sys: {
+    country: string;
+  };
 }
 
 export interface WeatherDisplay {
@@ -32,6 +35,7 @@ export interface WeatherDisplay {
   windDirection: number;
   description: string;
   icon: string;
-  lat: number;   // 👈 añadidos
-  lon: number; 
+  lat: number;  
+  lon: number;
+  country: string;
 }

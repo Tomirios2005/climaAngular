@@ -11,11 +11,13 @@ import { City } from '../../interfaces/city.interface';
 })
 export class WeatherDisplayComponent {
   @Input() weather: WeatherDisplay | null = null;
-  @Input() isFavorite: boolean = false;
   @Input() city: City | null = null;
+  @Input() isFavorite: boolean = false;
+
   @Output() addFavoriteCity = new EventEmitter<City>();
   @Output() addFavorite = new EventEmitter<void>();
   @Output() removeFavorite = new EventEmitter<void>();
+
 
 
   getWeatherIconUrl(icon: string): string {
@@ -33,7 +35,9 @@ export class WeatherDisplayComponent {
   }
   onAddToFavoritesClicked() {
   if (this.city) {
+    console.log('Adding city to favorites:', this.city);
     this.addFavoriteCity.emit(this.city);
   }
+  
 }
 }
